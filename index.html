@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EthicTech | Mengasah Etika dalam Teknologi</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset & Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #f43f5e;
+            --warning: #f59e0b;
+            --success: #10b981;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --text-light: #f8fafc;
+        }
+
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e1b4b, #312e81, #1e293b);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: var(--text-light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 1.6rem;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+            letter-spacing: -1px;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            margin-left: 1.8rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: 0.3s;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            opacity: 1;
+            color: var(--primary);
+            text-shadow: 0 0 15px rgba(99, 102, 241, 0.5);
+        }
+
+        .page {
+            display: none;
+            padding-top: 100px;
+            min-height: 100vh;
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Hero Section Refined --- */
+        .hero {
+            height: calc(100vh - 100px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-badge {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            animation: slideDown 1s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 10vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 1.8rem;
+            max-width: 1000px;
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            max-width: 750px;
+            margin-bottom: 3rem;
+            line-height: 1.6;
+            color: #cbd5e1;
+            font-weight: 300;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .cta-button {
+            padding: 1.2rem 2.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.5);
+        }
+
+        .cta-outline {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(5px);
+            box-shadow: none;
+        }
+
+        .cta-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        /* --- Content Container --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 32px;
+            padding: 4rem;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            transition: 0.4s;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .info-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateY(-10px);
+        }
+
+        .info-item h3 {
+            margin-bottom: 1.2rem;
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .info-item p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        .example-box {
+            padding: 1.2rem;
+            background: rgba(0,0,0,0.4);
+            border-left: 4px solid var(--secondary);
+            font-size: 0.95rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+        }
+
+        .example-label {
+            display: block;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+        }
+
+        /* --- Legal Cards --- */
+        .legal-card {
+            border-left: 4px solid var(--accent);
+            background: rgba(244, 63, 94, 0.03);
+            margin-bottom: 1.5rem;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(244, 63, 94, 0.1);
+            transition: 0.3s;
+        }
+
+        .legal-card:hover {
+            background: rgba(244, 63, 94, 0.08);
+            transform: translateX(10px);
+        }
+
+        .penalty-badge {
+            background: linear-gradient(to right, var(--accent), #e11d48);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 800;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(244, 63, 94, 0.3);
+        }
+
+        .law-article {
+            font-weight: 800;
+            color: var(--warning);
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        /* --- Quiz System --- */
+        .quiz-box {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .question-text {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.5;
+            background: rgba(255,255,255,0.03);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            font-weight: 600;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 1.4rem;
+            border-radius: 16px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        .option-btn:hover {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--primary);
+            transform: scale(1.02);
+        }
+
+        .result-area {
+            display: none;
+            text-align: center;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .result-badge {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--primary);
+            border-radius: 50px;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 4rem 1rem;
+            opacity: 0.5;
+            font-size: 0.9rem;
+            border-top: 1px solid var(--glass-border);
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.8rem; }
+            .glass-card { padding: 2rem; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo" onclick="showPage('home')">EthicTech.</div>
+        <div class="nav-links">
+            <button id="btn-home" onclick="showPage('home')" class="active">Beranda</button>
+            <button id="btn-materi" onclick="showPage('materi')">Materi & Kasus</button>
+            <button id="btn-hukum" onclick="showPage('hukum')">Hukum & Sanksi</button>
+            <button id="btn-quiz" onclick="showPage('quiz')">Mulai Uji Etika</button>
+        </div>
+    </nav>
+
+    <!-- Halaman Beranda -->
+    <main id="page-home" class="page active">
+        <header class="hero">
+            <div class="hero-badge">Pusat Pembelajaran Etika Digital</div>
+            <h1>
+                <span>Integritas adalah</span>
+                <span class="highlight">Fondasi Inovasi</span>
+            </h1>
+            <p>Eksplorasi etika berbasis kasus nyata, pahami konsekuensi hukum UU ITE, dan uji kompas moral Anda dalam skenario profesional yang kompleks.</p>
+            <div class="cta-group">
+                <button onclick="showPage('materi')" class="cta-button">Eksplorasi Kasus</button>
+                <button onclick="showPage('quiz')" class="cta-button cta-outline">Mulai Uji Kemampuan</button>
+            </div>
+        </header>
+    </main>
+
+    <!-- Halaman Materi & Kasus Nyata -->
+    <section id="page-materi" class="page">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title">Kurikulum & Studi Kasus</h2>
+                <div class="grid">
+                    <div class="info-item">
+                        <h3>🔒 Privasi Data</h3>
+                        <p>Data bukan sekadar angka, melainkan hak asasi manusia. Sekali bocor, privasi pengguna tidak bisa dikembalikan sepenuhnya.</p>
+                        <div class="example-box">
+                            <span class="example-label">Kasus Dunia Nyata</span>
+                            <strong>Cambridge Analytica (2018)</strong>: Manipulasi psikologis menggunakan data 87 juta akun media sosial tanpa izin.
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🤖 Bias Algoritma</h3>
+                        <p>AI belajar dari data historis. Jika data tersebut bias, sistem akan otomatis mendiskriminasi kelompok tertentu tanpa sadar.</p>
+                        <div class="example-box">
+                            <span class="example-label">Kasus Dunia Nyata</span>
+                            <strong>Amazon Recruitment AI</strong>: Penghentian sistem rekrutmen otomatis karena terbukti diskriminatif terhadap wanita.
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <h3>📢 Tanggung Jawab Sosial</h3>
+                        <p>Algoritma tidak boleh hanya mengejar profit, namun juga harus mempertimbangkan dampak kesehatan mental dan kebenaran.</p>
+                        <div class="example-box">
+                            <span class="example-label">Kasus Dunia Nyata</span>
+                            <strong>The Social Dilemma</strong>: Dokumentasi bagaimana algoritma dirancang untuk mengeksploitasi dopamin manusia.
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <h3>🛡️ Etika Keamanan</h3>
+                        <p>Keahlian teknis tinggi menuntut moralitas yang setara agar tidak menjadi senjata yang merusak infrastruktur publik.</p>
+                        <div class="example-box">
+                            <span class="example-label">Kasus Dunia Nyata</span>
+                            <strong>Kevin Mitnick</strong>: Legenda peretas yang bertransformasi menjadi pelindung keamanan siber paling disegani.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Halaman Hukum & Sanksi -->
+    <section id="page-hukum" class="page">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title">Konsekuensi Hukum (UU ITE)</h2>
+                <div class="grid">
+                    <div class="legal-card">
+                        <span class="law-article">Pasal 30 (Akses Ilegal)</span>
+                        <p>Tindakan masuk ke sistem komputer atau sistem elektronik orang lain dengan cara apa pun tanpa izin tertulis atau lisan.</p>
+                        <div class="penalty-badge">Sanksi: 6 - 8 Tahun Penjara</div>
+                    </div>
+                    <div class="legal-card">
+                        <span class="law-article">Pasal 31 (Penyadapan)</span>
+                        <p>Melakukan intersepsi atau penyadapan atas informasi dan dokumen elektronik dalam suatu sistem tertentu.</p>
+                        <div class="penalty-badge">Sanksi: Maksimal 10 Tahun Penjara</div>
+                    </div>
+                    <div class="legal-card">
+                        <span class="law-article">Pasal 32 (Manipulasi Data)</span>
+                        <p>Mengubah, menambah, mengurangi, merusak, atau memindahkan informasi milik orang lain secara ilegal.</p>
+                        <div class="penalty-badge">Sanksi: Maksimal 8 Tahun Penjara</div>
+                    </div>
+                    <div class="legal-card">
+                        <span class="law-article">Pasal 27 (Konten Terlarang)</span>
+                        <p>Mendistribusikan muatan yang melanggar kesusilaan, perjudian, penghinaan, atau pemerasan elektronik.</p>
+                        <div class="penalty-badge">Sanksi: 4 - 6 Tahun Penjara</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Halaman Kuis -->
+    <section id="page-quiz" class="page">
+        <div class="container">
+            <div class="glass-card">
+                <h2 class="section-title">Uji Kompas Etika (20 Soal)</h2>
+                
+                <div id="quiz-ui">
+                    <div style="text-align: center; margin-bottom: 3rem;">
+                        <span id="progress-text" style="background: var(--primary); padding: 8px 25px; border-radius: 50px; font-size: 0.9rem; font-weight: 800; box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);">Pertanyaan 1 / 20</span>
+                    </div>
+                    <div class="quiz-box">
+                        <p id="q-text" class="question-text">Memuat pertanyaan tantangan...</p>
+                        <div id="options" class="options-list"></div>
+                    </div>
+                </div>
+
+                <div id="result-area" class="result-area">
+                    <div class="result-badge">Hasil Analisis Etika</div>
+                    <h2 id="res-title" style="font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800;">Menganalisis Jawaban...</h2>
+                    <div id="res-score-circle" style="font-size: 4rem; font-weight: 900; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin: 1.5rem 0;">0%</div>
+                    <p id="res-desc" style="font-size: 1.15rem; line-height: 1.7; color: #94a3b8; max-width: 650px; margin: 0 auto;">...</p>
+                    <div style="display: flex; gap: 1.5rem; justify-content: center; margin-top: 3.5rem; flex-wrap: wrap;">
+                        <button onclick="restartQuiz()" class="cta-button cta-outline">Ulangi Ujian</button>
+                        <button onclick="showPage('home')" class="cta-button">Ke Beranda</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 EthicTech. Dirancang untuk meningkatkan kesadaran etika digital profesional.</p>
+    </footer>
+
+    <script>
+        // Data Kuis (20 Soal Kompleks)
+        const quizData = [
+            {
+                q: "Belajar dari kasus Cambridge Analytica, apa tanggung jawab utama pengembang saat mengintegrasikan API pihak ketiga?",
+                options: [
+                    { t: "Memastikan hanya mengambil data yang benar-benar dibutuhkan aplikasi secara fungsional.", s: 10 },
+                    { t: "Mengambil data sebanyak mungkin selama sistem API tersebut mengizinkannya.", s: 0 },
+                    { t: "Mengabaikan kebijakan privasi API karena itu adalah tanggung jawab penyedia API.", s: 2 }
+                ]
+            },
+            {
+                q: "Jika Anda menemukan celah keamanan kritis di sistem perusahaan pesaing, tindakan mana yang sesuai dengan UU ITE Pasal 30?",
+                options: [
+                    { t: "Melaporkannya secara rahasia melalui prosedur Responsible Disclosure atau Bug Bounty.", s: 10 },
+                    { t: "Masuk ke sistem tersebut untuk membuktikan kelemahan dan mengambil sampel data sebagai bukti.", s: 0 },
+                    { t: "Meminta tebusan secara anonim agar celah tersebut tidak dibocorkan ke publik.", s: -10 }
+                ]
+            },
+            {
+                q: "Amazon menghentikan AI rekrutmennya karena bias gender. Sebagai Engineer, bagaimana cara mencegah hal ini?",
+                options: [
+                    { t: "Melakukan audit dataset secara berkala dan menguji model terhadap berbagai skenario keadilan.", s: 10 },
+                    { t: "Cukup memastikan akurasi prediksi model mencapai di atas 95%.", s: 0 },
+                    { t: "Menghapus kolom 'Jenis Kelamin' dari dataset tanpa mengecek korelasi data lainnya.", s: 4 }
+                ]
+            },
+            {
+                q: "Seorang atasan meminta Anda menyisipkan 'Backdoor' pada aplikasi klien agar bisa memantau aktivitas mereka. Secara hukum (UU ITE):",
+                options: [
+                    { t: "Tindakan ini melanggar Pasal 30 dan 31 karena memfasilitasi akses ilegal dan penyadapan.", s: 10 },
+                    { t: "Boleh dilakukan karena merupakan perintah atasan dalam lingkungan kerja resmi.", s: 0 },
+                    { t: "Diperbolehkan asal bertujuan untuk membantu klien jika mereka lupa password.", s: 2 }
+                ]
+            },
+            {
+                q: "Apa dampak etis paling berbahaya dari penggunaan 'Dark Patterns' pada desain antarmuka aplikasi?",
+                options: [
+                    { t: "Merusak kepercayaan pengguna secara permanen demi keuntungan jangka pendek perusahaan.", s: 10 },
+                    { t: "Membantu perusahaan mencapai target pendapatan tahunan dengan lebih cepat.", s: 0 },
+                    { t: "Hanya masalah estetika yang tidak berdampak pada kepuasan pengguna jangka panjang.", s: 0 }
+                ]
+            },
+            {
+                q: "Berdasarkan UU ITE Pasal 32, memindahkan database kantor ke penyimpanan pribadi tanpa izin tertulis adalah pelanggaran karena...",
+                options: [
+                    { t: "Tindakan tersebut memindahkan Informasi Elektronik milik orang lain secara tidak sah.", s: 10 },
+                    { t: "Hanya melanggar jika file tersebut akhirnya dijual atau disebarkan ke pihak luar.", s: 0 },
+                    { t: "Tidak melanggar selama dilakukan untuk kepentingan pekerjaan di rumah.", s: 3 }
+                ]
+            },
+            {
+                q: "Dalam konteks GDPR, apakah pengembang boleh menyimpan data IP Address pengguna selamanya tanpa tujuan jelas?",
+                options: [
+                    { t: "Tidak, data harus dihapus jika tujuan pengolahannya sudah selesai (Storage Limitation).", s: 10 },
+                    { t: "Boleh, karena IP Address dianggap sebagai data umum yang tidak sensitif.", s: 0 },
+                    { t: "Boleh, asalkan server database berada di luar wilayah Uni Eropa.", s: 2 }
+                ]
+            },
+            {
+                q: "Algoritma media sosial sering menciptakan 'Echo Chambers'. Mengapa ini menjadi masalah etika teknologi?",
+                options: [
+                    { t: "Karena membatasi paparan pengguna terhadap informasi yang berlawanan dan memperburuk polarisasi.", s: 10 },
+                    { t: "Karena membuat konsumsi daya baterai perangkat menjadi lebih boros.", s: 0 },
+                    { t: "Bukan masalah, karena pengguna memang hanya ingin melihat apa yang mereka sukai.", s: 0 }
+                ]
+            },
+            {
+                q: "Anda ditugaskan membangun sistem 'Face Recognition' untuk kantor, namun data tersebut juga dijual ke pihak ketiga. Apa langkah Anda?",
+                options: [
+                    { t: "Menolak penugasan tersebut kecuali ada transparansi dan persetujuan eksplisit dari pengguna.", s: 10 },
+                    { t: "Melaksanakannya saja karena pengolahan data adalah wewenang penuh pemilik perusahaan.", s: 0 },
+                    { t: "Mengaburkan (blur) wajah dalam database agar tidak dikenali namun tetap bisa dijual.", s: 3 }
+                ]
+            },
+            {
+                q: "Menurut UU ITE Pasal 28, menyebarkan informasi bohong (hoax) yang menyesatkan konsumen diancam dengan:",
+                options: [
+                    { t: "Pidana penjara paling lama 6 tahun dan/atau denda maksimal 1 miliar rupiah.", s: 10 },
+                    { t: "Cukup permintaan maaf terbuka di media massa selama tiga hari berturut-turut.", s: 0 },
+                    { t: "Pencabutan hak akses internet selama satu tahun oleh penyedia jasa.", s: 0 }
+                ]
+            },
+            {
+                q: "Apa yang dimaksud dengan 'Privacy by Design' dalam pengembangan perangkat lunak?",
+                options: [
+                    { t: "Mengintegrasikan perlindungan privasi sejak tahap awal perancangan sistem, bukan sebagai tambahan.", s: 10 },
+                    { t: "Membuat tampilan antarmuka aplikasi dengan warna gelap agar data tidak terlihat orang lain.", s: 0 },
+                    { t: "Menyertakan dokumen kebijakan privasi yang sangat panjang di akhir aplikasi.", s: 2 }
+                ]
+            },
+            {
+                q: "Anda menemukan rekan kerja menggunakan library berbayar secara bajakan untuk proyek klien. Apa tindakan etisnya?",
+                options: [
+                    { t: "Mengingatkan bahaya hukumnya dan menyarankan alternatif Open Source yang legal.", s: 10 },
+                    { t: "Diam saja karena hal tersebut umum dilakukan untuk menekan biaya produksi.", s: 0 },
+                    { t: "Melaporkan langsung ke pihak kepolisian tanpa memberi tahu atasan terlebih dahulu.", s: 4 }
+                ]
+            },
+            {
+                q: "UU ITE Pasal 31 melarang intersepsi. Apakah memasang Keylogger di komputer rekan kerja tanpa izin termasuk pelanggaran?",
+                options: [
+                    { t: "Ya, karena menyadap transmisi informasi elektronik secara ilegal.", s: 10 },
+                    { t: "Tidak, asalkan Keylogger tersebut hanya digunakan untuk tujuan bercanda.", s: 0 },
+                    { t: "Tergantung apakah data yang dicatat mengandung informasi finansial atau tidak.", s: 2 }
+                ]
+            },
+            {
+                q: "Apa risiko etis terbesar dari 'Deepfake' di masa depan bagi masyarakat?",
+                options: [
+                    { t: "Erosi kebenaran dan hilangnya kepercayaan publik terhadap bukti visual/audio.", s: 10 },
+                    { t: "Meningkatnya kebutuhan akan kapasitas penyimpanan data yang lebih besar.", s: 0 },
+                    { t: "Membuat produksi film menjadi jauh lebih murah bagi studio kecil.", s: 1 }
+                ]
+            },
+            {
+                q: "Sebagai Admin Sistem, Anda melihat dokumen rahasia atasan yang berisi rencana PHK massal. Apa sikap profesional Anda?",
+                options: [
+                    { t: "Menjaga kerahasiaan informasi tersebut sesuai hak akses dan wewenang Anda.", s: 10 },
+                    { t: "Membocorkan informasi tersebut ke grup WhatsApp kantor agar semua orang bisa bersiap.", s: -5 },
+                    { t: "Menghapus dokumen tersebut dari server agar PHK tidak terjadi.", s: 0 }
+                ]
+            },
+            {
+                q: "Apa tanggung jawab pengembang jika algoritma yang dibuat secara tidak sengaja menyebabkan kerugian finansial massal bagi pengguna?",
+                options: [
+                    { t: "Bertanggung jawab penuh, melakukan investigasi terbuka, dan memperbaiki sistem segera.", s: 10 },
+                    { t: "Menyalahkan keterbatasan teknologi dan meminta pengguna maklum.", s: 0 },
+                    { t: "Mengubah log aktivitas agar kesalahan algoritma terlihat seperti kesalahan pengguna.", s: -10 }
+                ]
+            },
+            {
+                q: "Dalam pengembangan AI, apa yang dimaksud dengan 'Right to Explanation' bagi pengguna?",
+                options: [
+                    { t: "Hak pengguna untuk mengetahui alasan logis di balik keputusan otomatis yang dibuat AI terhadap mereka.", s: 10 },
+                    { t: "Hak pengguna untuk mendapatkan salinan kode sumber (source code) dari algoritma AI tersebut.", s: 2 },
+                    { t: "Hak pengguna untuk meminta bantuan teknis gratis selama 24 jam penuh.", s: 0 }
+                ]
+            },
+            {
+                q: "Jika Anda diminta membuat fitur 'Shadow Banning' yang tidak transparan, apa pertimbangan etisnya?",
+                options: [
+                    { t: "Melanggar prinsip transparansi dan kebebasan berekspresi pengguna tanpa pemberitahuan.", s: 10 },
+                    { t: "Bagus untuk menjaga komunitas tetap bersih tanpa menimbulkan protes dari pengguna bermasalah.", s: 0 },
+                    { t: "Hanya fitur teknis biasa yang tidak memiliki dampak moral bagi masyarakat.", s: 2 }
+                ]
+            },
+            {
+                q: "Berapa lama ancaman pidana maksimal bagi orang yang dengan sengaja merusak sistem elektronik orang lain (Pasal 33 UU ITE)?",
+                options: [
+                    { t: "Pidana penjara paling lama 10 tahun.", s: 10 },
+                    { t: "Pidana penjara paling lama 2 tahun.", s: 0 },
+                    { t: "Hanya hukuman kerja sosial selama 100 jam.", s: 0 }
+                ]
+            },
+            {
+                q: "Apa peran utama seorang Ethical Hacker (White Hat) dalam industri teknologi modern?",
+                options: [
+                    { t: "Mencari kelemahan sistem secara legal untuk diperbaiki sebelum dieksploitasi pihak jahat.", s: 10 },
+                    { t: "Mencuri data kompetitor untuk membantu perusahaan tempatnya bekerja menang persaingan.", s: 0 },
+                    { t: "Membuat virus yang bisa melacak keberadaan hacker lain di seluruh dunia.", s: 2 }
+                ]
+            }
+        ];
+
+        let currentIdx = 0;
+        let score = 0;
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById('page-' + pageId).classList.add('active');
+            
+            document.querySelectorAll('.nav-links button').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-' + pageId);
+            if(activeBtn) activeBtn.classList.add('active');
+
+            if(pageId === 'quiz' && currentIdx === 0) {
+                initQuiz();
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function initQuiz() {
+            const q = quizData[currentIdx];
+            document.getElementById('progress-text').innerText = `Pertanyaan ${currentIdx + 1} / ${quizData.length}`;
+            document.getElementById('q-text').innerText = q.q;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt.t;
+                btn.onclick = () => nextQuestion(opt.s);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function nextQuestion(point) {
+            score += point;
+            currentIdx++;
+            
+            if(currentIdx < quizData.length) {
+                initQuiz();
+            } else {
+                showEvaluation();
+            }
+        }
+
+        function showEvaluation() {
+            document.getElementById('quiz-ui').style.display = 'none';
+            const resArea = document.getElementById('result-area');
+            resArea.style.display = 'block';
+            
+            const title = document.getElementById('res-title');
+            const desc = document.getElementById('res-desc');
+            const scoreDisplay = document.getElementById('res-score-circle');
+            
+            const maxPossible = quizData.length * 10;
+            const percentage = Math.max(0, Math.round((score / maxPossible) * 100));
+            scoreDisplay.innerText = percentage + "%";
+            
+            if(percentage >= 90) {
+                title.innerText = "🛡️ Chief Ethics Guardian";
+                desc.innerText = "Luar biasa! Anda memiliki pemahaman etika dan hukum tingkat tinggi. Anda mampu menavigasi dilema teknis yang sangat kompleks tanpa mengorbankan integritas moral atau melanggar UU ITE.";
+            } else if(percentage >= 70) {
+                title.innerText = "⚖️ Responsible Technologist";
+                desc.innerText = "Sangat Baik. Anda sadar akan batasan hukum dan moral. Anda memahami risiko besar di balik inovasi, meskipun beberapa detail spesifik tentang regulasi masih perlu diperdalam.";
+            } else if(percentage >= 50) {
+                title.innerText = "⚠️ Associate Engineer";
+                desc.innerText = "Cukup. Anda memiliki dasar etika, namun masih rentan terhadap tekanan atasan atau godaan teknis yang berisiko menyerempet pelanggaran hukum UU ITE. Disarankan untuk membaca kembali bab sanksi pidana.";
+            } else {
+                title.innerText = "🚫 Ethical Liability";
+                desc.innerText = "Waspada! Skor Anda menunjukkan pemahaman yang minim tentang dampak hukum dan moral dari tindakan digital. Tindakan Anda di lapangan berisiko tinggi menjerat Anda ke penjara berdasarkan UU ITE.";
+            }
+        }
+
+        function restartQuiz() {
+            currentIdx = 0;
+            score = 0;
+            document.getElementById('quiz-ui').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+            initQuiz();
+        }
+
+        window.onload = () => showPage('home');
+    </script>
+</body>
+</html>
